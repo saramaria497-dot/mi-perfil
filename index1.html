@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f4fb">
+  <meta name="description" content="Perfil académico personal: presentación, intereses, metas y retrato.">
+  <title>Perfil académico | Mi espacio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #263650;
+      --muted: #68758a;
+      --blue: #a9c5e8;
+      --blue-deep: #5479a8;
+      --pink: #efb8ca;
+      --pink-deep: #bd718f;
+      --paper: #fffdfd;
+      --line: #e8e5ee;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 9% 12%, rgba(239, 184, 202, .22), transparent 28rem),
+        radial-gradient(ellipse at 92% 38%, rgba(169, 197, 232, .24), transparent 31rem),
+        #f8f7fa;
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 8px 26px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--blue-deep);
+      font-size: .79rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid #d9c6d6;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--pink-deep);
+      font-family: var(--serif);
+      font-size: 1.05rem;
+    }
+
+    .top-note {
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .profile-card {
+      overflow: hidden;
+      border: 1px solid rgba(220, 216, 229, .9);
+      border-radius: 26px;
+      background: rgba(255, 253, 253, .95);
+      box-shadow: 0 24px 70px rgba(64, 69, 97, .09);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 320px;
+      align-content: center;
+      justify-items: center;
+      overflow: hidden;
+      padding: 56px 24px 50px;
+      background: linear-gradient(118deg, #f8e9ef 0%, #f6f1f8 48%, #e8f0fa 100%);
+      text-align: center;
+    }
+
+    .hero::before, .hero::after {
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero::before { top: -112px; left: -58px; }
+    .hero::after { right: -72px; bottom: -132px; width: 260px; height: 260px; }
+
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 11px;
+      color: var(--pink-deep);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, p { margin-top: 0; }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px;
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      position: relative;
+      z-index: 1;
+      max-width: 510px;
+      margin-bottom: 0;
+      color: #64728a;
+      font-size: 1rem;
+    }
+
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+      padding: 19px 24px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .section-nav a {
+      padding: 7px 12px;
+      border: 1px solid #e8e6ed;
+      border-radius: 999px;
+      color: #5d6980;
+      font-size: .78rem;
+      text-decoration: none;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .section-nav a:hover, .section-nav a:focus-visible {
+      border-color: #d7b4ca;
+      background: #fbf1f5;
+      outline: none;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 36px;
+      padding: 8px 58px 48px;
+    }
+
+    .profile-section {
+      position: relative;
+      min-width: 0;
+      padding: 35px 0 31px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 20px;
+    }
+
+    .profile-section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 15px;
+    }
+
+    .section-number {
+      display: grid;
+      flex: 0 0 35px;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid #e6d7e3;
+      border-radius: 50%;
+      background: #fcf3f6;
+      color: var(--pink-deep);
+      font-family: var(--serif);
+      font-size: .93rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 1.42rem;
+      font-weight: 500;
+      letter-spacing: -.015em;
+    }
+
+    .section-body {
+      padding-left: 48px;
+      color: #5f6b80;
+      font-size: .94rem;
+    }
+
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .intro-section {
+      grid-column: 1 / -1;
+      padding-bottom: 34px;
+    }
+
+    .intro-section .section-body { max-width: 760px; }
+
+    .presentation-section { grid-column: 1 / -1; }
+
+    .presentation-section .section-body {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 32px;
+    }
+
+    .presentation-section .section-body p { margin-bottom: 12px; }
+
+    .stamps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px 6px 8px;
+      border: 1px dashed #d5bfd1;
+      border-radius: 7px;
+      background: #fff9fb;
+      color: #8d657e;
+      font-size: .73rem;
+      font-weight: 600;
+      letter-spacing: .025em;
+      transform: rotate(-1deg);
+    }
+
+    .stamp:nth-child(even) {
+      border-color: #c1d2e7;
+      background: #f7faff;
+      color: #607da2;
+      transform: rotate(1deg);
+    }
+
+    .stamp svg {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+    }
+
+    .interest-list {
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .interest-list li {
+      display: grid;
+      grid-template-columns: 31px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .interest-icon {
+      display: grid;
+      width: 29px;
+      height: 29px;
+      place-items: center;
+      border-radius: 9px;
+      background: #eef4fb;
+      color: var(--blue-deep);
+      font-size: .9rem;
+    }
+
+    .other-interests .interest-icon { background: #fcf0f4; color: var(--pink-deep); }
+    .interest-list strong { color: #3b4961; font-weight: 650; }
+
+    .goals-section {
+      grid-column: 1 / -1;
+      border-bottom: 0;
+    }
+
+    .goal-panel {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 17px 19px;
+      border: 1px solid #dce5f0;
+      border-radius: 12px;
+      background: linear-gradient(110deg, #f8fbff, #fff8fb);
+    }
+
+    .goal-star {
+      color: #9c7899;
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      line-height: 1;
+    }
+
+    .goal-panel p { margin: 0; }
+
+    .photo-section {
+      grid-column: 1 / -1;
+      padding: 35px 0 0;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 20px;
+    }
+
+    .photo-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, .75fr) 1.25fr;
+      gap: 34px;
+      align-items: center;
+      padding-left: 48px;
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: min(100%, 290px);
+      margin: 0 auto;
+      padding: 11px;
+      border: 1px solid #dbc9d7;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 7px 8px 0 #f1e4ec;
+      transform: rotate(-1deg);
+    }
+
+    .portrait-frame::after {
+      position: absolute;
+      top: -10px;
+      right: 23px;
+      width: 56px;
+      height: 20px;
+      border-right: 1px solid rgba(169, 143, 166, .35);
+      border-left: 1px solid rgba(169, 143, 166, .35);
+      background: rgba(236, 214, 230, .7);
+      content: "";
+      transform: rotate(4deg);
+    }
+
+    .portrait-art {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: #eaf1f8;
+    }
+
+    .photo-caption {
+      margin: 12px 0 0;
+      color: #8a7283;
+      font-family: var(--serif);
+      font-size: .9rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .photo-copy { color: #667287; font-size: .93rem; }
+    .photo-copy strong { color: #3b4961; }
+
+    .photo-copy .stamps { margin-top: 17px; }
+
+    footer {
+      padding: 0 20px 25px;
+      color: #8a91a0;
+      font-size: .75rem;
+      letter-spacing: .04em;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .page-shell { width: min(100% - 22px, 560px); padding-top: 16px; }
+      .topbar { padding: 0 4px 17px; }
+      .top-note { font-size: .65rem; text-align: right; }
+      .profile-card { border-radius: 19px; }
+      .hero { min-height: 275px; padding: 43px 20px; }
+      .section-nav { gap: 7px; padding: 15px 12px; }
+      .section-nav a { padding: 6px 9px; font-size: .72rem; }
+      .content { grid-template-columns: 1fr; gap: 0; padding: 0 23px 34px; }
+      .profile-section, .intro-section, .presentation-section, .goals-section { grid-column: 1; }
+      .profile-section { padding: 27px 0 24px; }
+      .presentation-section .section-body { grid-template-columns: 1fr; }
+      .photo-section { padding-top: 28px; }
+      .photo-layout { grid-template-columns: 1fr; gap: 25px; padding-left: 0; }
+      .section-body { padding-left: 0; }
+      .intro-section .section-body { padding-left: 0; }
+      .section-heading { gap: 10px; }
+      .section-number { flex-basis: 31px; width: 31px; height: 31px; }
+      .goal-panel { padding: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio del perfil">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        Mi espacio académico
+      </a>
+      <span class="top-note">Curiosidad · creatividad · aprendizaje</span>
+    </header>
+
+    <main class="profile-card">
+      <section class="hero" id="inicio" aria-labelledby="page-title">
+        <p class="eyebrow">Perfil académico</p>
+        <h1 id="page-title">Tu nombre aquí</h1>
+        <p class="hero-subtitle">Un espacio para compartir quién soy, qué me inspira y hacia dónde quiero crecer.</p>
+      </section>
+
+      <nav class="section-nav" aria-label="Secciones del perfil">
+        <a href="#nombre">01 · Nombre</a>
+        <a href="#presentacion">02 · Presentación</a>
+        <a href="#tecnologia">03 · Tecnología</a>
+        <a href="#otros-intereses">04 · Intereses</a>
+        <a href="#metas">05 · Metas</a>
+        <a href="#fotografia">06 · Retrato</a>
+      </nav>
+
+      <div class="content">
+        <section class="profile-section intro-section" id="nombre">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">01</span>
+            <h2>Un poco sobre mí</h2>
+          </div>
+          <div class="section-body">
+            <p><strong>Nombre:</strong> Tu nombre y apellido &nbsp;·&nbsp; <strong>Curso:</strong> Tu curso o programa</p>
+            <p>Aprendo con entusiasmo y disfruto encontrar nuevas formas de convertir mis ideas en proyectos.</p>
+            <div class="stamps" aria-label="Sellos personales">
+              <span class="stamp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m4 17 10-10 3 3L7 20H4v-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12.5 8.5 3 3M5 4l.8 1.8L8 6.5l-2.2.7L5 9l-.8-1.8L2 6.5l2.2-.7L5 4Z" fill="currentColor"/></svg>
+                Ideas en proceso
+              </span>
+              <span class="stamp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19c1-5 5-9 12-13M7 17c3 2 7 1 9-2 2-3 1-7 1-9-3 0-7 1-9 4-2 2-2 5-1 7Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Crecer aprendiendo
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-section presentation-section" id="presentacion">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">02</span>
+            <h2>Mi presentación</h2>
+          </div>
+          <div class="section-body">
+            <p>Me considero una persona curiosa, responsable y con muchas ganas de aprender. Cada día es una oportunidad para descubrir algo nuevo.</p>
+            <p>En mis estudios procuro ser constante, hacer preguntas y participar con respeto. Creo que equivocarse también forma parte de aprender.</p>
+            <p>Me gusta trabajar en equipo, escuchar distintas ideas y aportar lo mejor de mí para alcanzar objetivos compartidos.</p>
+            <p>Cuando encuentro un tema que me interesa, disfruto investigarlo y buscar maneras creativas de ponerlo en práctica.</p>
+            <p>Quiero seguir desarrollando mis habilidades académicas y personales, paso a paso, con dedicación y confianza.</p>
+            <p>Este perfil reúne algunas de las cosas que me inspiran hoy y los sueños que deseo convertir en proyectos mañana.</p>
+          </div>
+        </section>
+
+        <section class="profile-section" id="tecnologia">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">03</span>
+            <h2>Intereses tecnológicos</h2>
+          </div>
+          <div class="section-body">
+            <ul class="interest-list">
+              <li><span class="interest-icon" aria-hidden="true">⌘</span><span><strong>Programación:</strong> crear páginas, aplicaciones y soluciones digitales.</span></li>
+              <li><span class="interest-icon" aria-hidden="true">✦</span><span><strong>Diseño digital:</strong> combinar colores, formas e ideas para comunicar.</span></li>
+              <li><span class="interest-icon" aria-hidden="true">◎</span><span><strong>Robótica e innovación:</strong> descubrir cómo la tecnología puede ayudar a las personas.</span></li>
+            </ul>
+            <div class="stamps">
+              <span class="stamp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 8-4 4 4 4m6-8 4 4-4 4m-2-10-2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Mente digital
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-section other-interests" id="otros-intereses">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">04</span>
+            <h2>Otros intereses</h2>
+          </div>
+          <div class="section-body">
+            <ul class="interest-list">
+              <li><span class="interest-icon" aria-hidden="true">✿</span><span><strong>Arte y pintura:</strong> expresarme con dibujos, colores y pequeños detalles.</span></li>
+              <li><span class="interest-icon" aria-hidden="true">♫</span><span><strong>Música y lectura:</strong> encontrar inspiración, historias y nuevas perspectivas.</span></li>
+              <li><span class="interest-icon" aria-hidden="true">♡</span><span><strong>Naturaleza:</strong> disfrutar los espacios tranquilos y aprender del entorno.</span></li>
+            </ul>
+            <div class="stamps">
+              <span class="stamp">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M8 4l8 16M16 4 8 20" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                Un toque de color
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="profile-section goals-section" id="metas">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">05</span>
+            <h2>Lo que quiero lograr</h2>
+          </div>
+          <div class="section-body">
+            <div class="goal-panel">
+              <span class="goal-star" aria-hidden="true">✧</span>
+              <p>Mi meta es seguir aprendiendo, fortalecer mis habilidades y participar en proyectos que unan tecnología y creatividad. Quiero aportar ideas útiles y construir un futuro que me represente.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="photo-section" id="fotografia">
+          <div class="section-heading">
+            <span class="section-number" aria-hidden="true">06</span>
+            <h2>Mi retrato</h2>
+          </div>
+          <div class="photo-layout">
+            <figure class="portrait-frame">
+              <svg class="portrait-art" viewBox="0 0 320 370" role="img" aria-labelledby="portrait-title portrait-desc">
+                <title id="portrait-title">Ilustración de perfil de estudiante</title>
+                <desc id="portrait-desc">Retrato ilustrado con fondo azul claro, camisa rosada y detalles artísticos.</desc>
+                <rect width="320" height="370" fill="#eaf1f8"/>
+                <circle cx="266" cy="68" r="31" fill="#f3dbe5"/>
+                <path d="M0 260c45-33 76-25 117 2 36 24 68 23 105-2 31-20 62-24 98-7v117H0V260Z" fill="#d9e8f4"/>
+                <path d="M55 370c10-64 44-103 105-103s95 39 105 103H55Z" fill="#8eaed2"/>
+                <path d="m121 270 39 46 39-46-18-18h-42l-18 18Z" fill="#fff8fb"/>
+                <path d="M126 136c0-43 15-67 42-67 33 0 48 27 43 75l-8 50c-6 28-23 45-40 45-21 0-38-22-43-48l6-55Z" fill="#c98770"/>
+                <path d="M115 153c-9-47-1-86 26-101 25-15 64-8 80 22 12 22 10 54 3 79l-9-3c2-25-3-44-13-56-6 20-29 34-65 35-2 15-3 33-1 47l-11 1-10-24Z" fill="#493b47"/>
+                <path d="M145 160c4-3 9-3 13 0m22 0c4-3 9-3 13 0" fill="none" stroke="#523f46" stroke-width="3" stroke-linecap="round"/>
+                <path d="M160 184c7 5 15 5 22 0" fill="none" stroke="#9e5e5e" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="148" cy="174" r="3" fill="#3c3540"/>
+                <circle cx="187" cy="174" r="3" fill="#3c3540"/>
+                <path d="M80 105c-12 8-18 21-18 35m190 43c10 9 14 22 13 37" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+                <path d="m51 73 4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z" fill="#c786a3"/>
+                <path d="m263 238 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#8eaed2"/>
+                <path d="M36 320c10-9 18-9 28 0m-28 9c10-9 18-9 28 0" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>
+              </svg>
+              <figcaption class="photo-caption">Un retrato con personalidad</figcaption>
+            </figure>
+            <div class="photo-copy">
+              <p><strong>Un espacio para tu fotografía.</strong> Este retrato ilustrado es una muestra temporal: reemplázalo por una foto tuya para personalizar el perfil.</p>
+              <p>Elige una imagen clara y apropiada para un contexto académico. Puedes conservar el marco y los colores para mantener el estilo de la página.</p>
+              <div class="stamps">
+                <span class="stamp">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.6"/></svg>
+                  Autenticidad
+                </span>
+                <span class="stamp">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 14 9l6 3-6 2-2 7-2-7-6-2 6-3 2-6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                  Hecho a mi manera
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>Mi perfil académico · Un espacio para aprender y crear</footer>
+  </div>
+</body>
+</html>
